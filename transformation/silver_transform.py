@@ -122,18 +122,17 @@ def filter_invalid_records(df: DataFrame) -> tuple[DataFrame, DataFrame]:
     - coordinates are null or out of NYC bounding box
     """
     coord_ok = (
-        F.col("pickup_latitude").between(40.4, 41.0)
-        & F.col("pickup_longitude").between(-74.3, -73.6)
-        & F.col("dropoff_latitude").between(40.4, 41.0)
-        & F.col("dropoff_longitude").between(-74.3, -73.6)
+        F.col("pickup_latitude").between(F.lit(40.4), F.lit(41.0))
+        & F.col("pickup_longitude").between(F.lit(-74.3), F.lit(-73.6))
+        & F.col("dropoff_latitude").between(F.lit(40.4), F.lit(41.0))
+        & F.col("dropoff_longitude").between(F.lit(-74.3), F.lit(-73.6))
     )
     valid_condition = (
-        F.col("fare_amount")
-        > 0
-        & (F.col("trip_distance") > 0)
-        & (F.col("trip_duration_minutes") > 0)
+        (F.col("fare_amount") > F.lit(0))
+        & (F.col("trip_distance") > F.lit(0))
+        & (F.col("trip_duration_minutes") > F.lit(0))
         & F.col("passenger_count").isNotNull()
-        & (F.col("passenger_count") > 0)
+        & (F.col("passenger_count") > F.lit(0))
         & F.col("pickup_datetime").isNotNull()
         & F.col("dropoff_datetime").isNotNull()
         & coord_ok
