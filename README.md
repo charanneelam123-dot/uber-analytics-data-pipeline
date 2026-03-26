@@ -167,3 +167,4 @@ python -m bandit -r . -x ./tests -ll -q
 
 `PySpark 3.5` · `Delta Lake 3.1` · `Apache Airflow 2.8` · `Databricks` · `Python 3.11`
 `AWS S3 / Azure ADLS` · `GitHub Actions CI/CD` · `black` · `ruff` · `bandit` · `pytest`
+
